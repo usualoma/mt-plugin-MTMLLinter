@@ -1,0 +1,11 @@
+id: MTMLLinter
+name: MTMLLinter
+version: 0.0.1
+
+description: <__trans phrase="This is an awesome plugin.">
+author_name: Taku Amano
+author_link: http://blog.taaas.jp/
+plugin_link: http://blog.taaas.jp/mt/mt-plugin-MTMLLinter/
+
+callbacks:
+  MT::App::CMS::template_param.edit_template: $MTMLLinter::MT::Plugin::MTMLLinter::template_param_edit_template

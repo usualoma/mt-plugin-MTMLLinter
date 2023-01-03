@@ -1,0 +1,34 @@
+<mt:SetVarBlock name="js_include" append="1">
+<__trans_section component="MTMLLinter">
+  <script src="<mt:Var name="plugin_mtml_linter_static_path" />/dist/edit_template.min.js?v=<mt:Var name="plugin_mtml_linter_version" />" defer></script>
+  <script type="module">
+    import init, {parse} from "<mt:Var name="plugin_mtml_linter_static_path" />/dist/mtml-parser/mtml-parser.js";
+    const { editor, jQuery } = window;
+    function getContent() {
+      const wrapper = editor.getWrapperElement();
+      if ( window.jQuery(wrapper).css('display') == 'none') {
+        return jQuery('#text').val();
+      } else {
+        return editor.getValue();
+      }
+    }
+    let oldContent = "";
+    init().then(() => {
+        setInterval(() => {
+          const content = getContent();
+          if (content !== oldContent) {
+            oldContent = content;
+            const ast = parse(content);
+            window.invokeMTMLLinter(ast);
+          }
+        }, 1000);
+    });
+  </script>
+  <link rel="stylesheet" href="<mt:Var name="plugin_mtml_linter_static_path" />/dist/edit_template.min.css?v=?v=<mt:Var name="plugin_mtml_linter_version" />" />
+  <template id="mtml-linter-alert">
+    <div class="alert alert-warning alert-dismissable mtml-linter-alert"><button type="button" class="close first-child" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="first-child last-child">×</span></button> 
+    <div class="mtml-linter-alert__message"></div>
+   </div>
+  </template>
+</__trans_section>
+</mt:SetVarBlock>
