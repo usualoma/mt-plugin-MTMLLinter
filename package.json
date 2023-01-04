@@ -41,6 +41,6 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "mtml-parser": "^0.0.6"
+    "mtml-parser": "^0.0.7"
   }
 }
